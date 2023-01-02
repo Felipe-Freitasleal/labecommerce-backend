@@ -1,0 +1,20 @@
+{
+  "name": "labecommerce-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Felipe-Freitasleal/labecommerce-backend.git"
+  },
+  "author": "Felipe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Felipe-Freitasleal/labecommerce-backend/issues"
+  },
+  "homepage": "https://github.com/Felipe-Freitasleal/labecommerce-backend#readme"
+}
