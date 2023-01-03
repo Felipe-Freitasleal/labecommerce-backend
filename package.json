@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "tsc && node ./build/index.js"
   },
   "repository": {
     "type": "git",
@@ -16,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/Felipe-Freitasleal/labecommerce-backend/issues"
   },
-  "homepage": "https://github.com/Felipe-Freitasleal/labecommerce-backend#readme"
+  "homepage": "https://github.com/Felipe-Freitasleal/labecommerce-backend#readme",
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "@types/node": "^18.11.18"
+  }
 }
