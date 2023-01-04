@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc && node ./build/index.js"
+    "start": "tsc && node ./build/index.js",
+    "start-users": "tsc && node ./build/addGetUser.js",
+    "start-product": "tsc && node ./build/addGetProduct.js",
+    "start-purchase": "tsc && node ./build/addGetPurchase.js"
   },
   "repository": {
     "type": "git",
