@@ -1,5 +1,5 @@
-import { user, product, purchase } from "./database";
+import { users, products, purchase } from "./database";
 
-console.table(user)
-console.table(product)
+console.table(users)
+console.table(products)
 console.table(purchase)
