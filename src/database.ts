@@ -10,6 +10,11 @@ export const users: TUser[] = [
         id: "654321",
         email: "ffcisca.gmail.com",
         password: "123fran123"
+    },
+    {
+        id: "bla123",
+        email: "bla@gmail.com",
+        password: "123bla"
     }
 ]
 
@@ -24,6 +29,12 @@ export const products: TProduct[] = [
         id: "54321",
         name: "Camiseta",
         price: 25,
+        category: CATEGORY_PRODUCT.CLOTHES_AND_SHOES
+    },
+    {
+        id: "12456",
+        name: "Tênis",
+        price: 55,
         category: CATEGORY_PRODUCT.CLOTHES_AND_SHOES
     }
 ]
@@ -46,5 +57,17 @@ export const purchase: TPurchase[] = [
         productId: "54321",
         quantity: 1,
         totalPrice: 25
+    },
+    {
+        userId: "bla123",
+        productId: "54321",
+        quantity: 3,
+        totalPrice: 45
+    },
+    {
+        userId: "bla123",
+        productId: "12456",
+        quantity: 2,
+        totalPrice: 110
     }
 ]
