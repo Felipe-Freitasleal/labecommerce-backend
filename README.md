@@ -1,6 +1,6 @@
 # **labecommerce-backend**
 
-Pojeto para o módulo de Back-End da Labenu. Este projeto consiste no desenvolvimento de uma API bara transintar informações de um banco de dados para o a simulação de um back-end funcional de um e-commerce.
+Projeto para o módulo de Back-End da Labenu. Este projeto consiste no desenvolvimento de uma API para transitar informações de um banco de dados, simulação de um back-end funcional de um e-commerce.
 
 ## **Tecnologias utilizada**
  - TypeScript
