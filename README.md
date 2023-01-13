@@ -2,7 +2,7 @@
 
 Pojeto para o módulo de Back-End da Labenu. Este projeto consiste no desenvolvimento de uma API bara transintar informações de um banco de dados para o a simulação de um back-end funcional de um e-commerce.
 
-## **Tecnológias utilizada**
+## **Tecnologias utilizada**
  - TypeScript
  - JavaScript
  - Express
