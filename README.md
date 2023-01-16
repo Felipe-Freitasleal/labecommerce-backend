@@ -7,6 +7,7 @@ Pojeto para o módulo de Back-End da Labenu. Este projeto consiste no desenvolvi
  - JavaScript
  - Express
  - API Rest
+ - SQLite
 
 ## **Funcionalidades do Projeto**
  - [x] Acessar todos os produtos cadastrados
