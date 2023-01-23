@@ -1,10 +1,10 @@
--- Active: 1674234746432@@127.0.0.1@3306
+-- Active: 1674511049964@@127.0.0.1@3306
 -- Relações SQL I  
 CREATE TABLE purchases(
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
     total_price REAL AVG NOT NULL,
     paid INTEGER NOT NULL,
-    delivered_at TEXT,
+    delivered_at TEXT DEFAULT(DATETIME()),
     buyer_id TEXT NOT NULL,
     FOREIGN KEY (buyer_id) REFERENCES users(id)
 );
