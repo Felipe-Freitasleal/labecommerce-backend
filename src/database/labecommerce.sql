@@ -1,4 +1,4 @@
--- Active: 1674234746432@@127.0.0.1@3306
+-- Active: 1674511049964@@127.0.0.1@3306
 --------- RELAÇÕES SQL II -----------
 CREATE TABLE purchases_products (
     purchase_id TEXT NO NULL,

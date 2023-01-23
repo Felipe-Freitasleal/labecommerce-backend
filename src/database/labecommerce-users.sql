@@ -1,4 +1,4 @@
--- Active: 1674234746432@@127.0.0.1@3306
+-- Active: 1674511049964@@127.0.0.1@3306
 CREATE TABLE users(
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
     name TEXT NOT NULL,
@@ -25,3 +25,6 @@ SELECT * FROM users
 ORDER BY email ASC;
 
 DROP TABLE users;
+
+SELECT * FROM users
+WHERE id = "p001";
