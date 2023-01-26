@@ -676,21 +676,57 @@ app.put("/products/:id", async (req: Request, res: Response) => {
 //////   PEGAR PURCHASES POR ID   //////////
 app.get("/purchases/:id", async (req: Request, res: Response) => {
   try {
-    const idPurchase  = req.params.id;
+    const idPurchase = req.params.id;
     const [getPurchase] = await db("purchases").where({ id: idPurchase });
 
     if (getPurchase) {
-      const getUsers = await db("purchases").select(
-        "purchases.id AS idPurchases",
-        "purchases.total_price AS totalPrice",
-        "purchases.delivered_at AS createdAt",
-        "purchases.paid AS isPaid",
-        "purchases.buyer_id AS buyerId",
-        "users.name",
-        "users.email"
-      )
-      .innerJoin(`users`, "purchases.buyer_id", "=",  "users.id").where({'purchases.id': idPurchase})
-      res.status(200).send([getUsers]);
+      const getProducts = await db("purchases_products")
+        .select(
+          "products.id AS idProduto",
+          "products.name AS ProdutoNome",
+          "products.price AS Preço",
+          "products.category AS Categoria",
+          "products.img AS Imagem",
+          "purchases_products.quantity AS Quantidade"
+        )
+        .innerJoin(
+          "products",
+          "purchases_products.product_id",
+          "=",
+          "products.id"
+        )
+        .where({ "purchases_products.purchase_id": idPurchase });
+
+      const getUsers = await db("purchases")
+        .select(
+          "purchases.id AS idPurchases",
+          "purchases.total_price AS totalPrice",
+          "purchases.delivered_at AS createdAt",
+          "purchases.paid AS isPaid",
+          "purchases.buyer_id AS buyerId",
+          "users.name AS NameBuyer",
+          "users.email AS EmailBuyer"
+        )
+        .innerJoin(`users`, "purchases.buyer_id", "=", "users.id")
+        .where({ "purchases.id": idPurchase });
+
+      const getObjectUsers: any = getUsers[0];
+      let modifyIsPaid = {
+        idPurchases: getObjectUsers.idPurchases,
+        totalPrice: getObjectUsers.totalPrice,
+        createdAt: getObjectUsers.createdAt,
+        isPaid: getObjectUsers.isPaid === 0 ? false : true,
+        buyerId: getObjectUsers.buyerId,
+        NameBuyer: getObjectUsers.NameBuyer,
+        EmailBuyer: getObjectUsers.EmailBuyer,
+      };
+
+      const purchase = {
+        compra: modifyIsPaid,
+        produtos: getProducts,
+      };
+
+      res.status(200).send(purchase);
     } else {
       res.status(404);
       throw new Error("Compra não encontrada");
