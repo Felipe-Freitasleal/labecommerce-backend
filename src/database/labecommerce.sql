@@ -14,6 +14,11 @@ VALUES
 ('PU0005', 'p0006', 1),
 ('PU0006', 'p0004', 1);
 
+INSERT INTO purchases_products (purchase_id, product_id, quantity)
+VALUES 
+('PU0001', 'p0003', 2),
+('PU0002', 'p0004', 1),
+('PU0003', 'p0006', 5);
 SELECT * FROM purchases_products;
 
 SELECT

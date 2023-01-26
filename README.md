@@ -7,7 +7,9 @@ Projeto para o módulo de Back-End da Labenu. Este projeto consiste no desenvolv
  - JavaScript
  - Express
  - API Rest
- - SQLite
+ - CRUD
+ - SQLite3
+ - Knex
 
 ## **Funcionalidades do Projeto**
  - [x] Acessar todos os produtos cadastrados
@@ -15,6 +17,8 @@ Projeto para o módulo de Back-End da Labenu. Este projeto consiste no desenvolv
  - [x] Acessar produto por nome
  - [x] Acessar produto por id
  - [x] Acessar compra por id do cliente
+ - [x] Acessar compra por seu id
+ - [x] Acessar todas as compras
  - [x] Cadastrar novos clientes
  - [x] Cadastrar novos produtos
  - [x] Criar nova compra para cada cliente
