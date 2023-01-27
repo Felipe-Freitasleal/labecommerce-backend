@@ -119,12 +119,13 @@ app.post("/products", async (req: Request, res: Response) => {
         throw new Error("O Id deve ser ser uma string");
       }
 
-      const getId = await db.raw(`
-        SELECT * FROM products
-        WHERE id = "${id}"
-      `);
+      // const getId = await db.raw(`
+      //   SELECT * FROM products
+      //   WHERE id = "${id}"
+      // `);
+      const [getId] = await db("products").where({ id: id });
 
-      if (getId.length > 0) {
+      if (getId) {
         res.status(400);
         throw new Error(
           "Id já cadastrado no sistem, não pode haver dois produtos com o mesmo id."
@@ -143,12 +144,13 @@ app.post("/products", async (req: Request, res: Response) => {
         throw new Error("Nome deve ter ao menos 3 caracteres.");
       }
 
-      const getName = await db.raw(`
-        SELECT * FROM products
-        WHERE name = "${name}"
-      `);
+      // const getName = await db.raw(`
+      //   SELECT * FROM products
+      //   WHERE name = "${name}"
+      // `);
+      const [getName] = await db("products").where({ name: name });
 
-      if (getName.length > 0) {
+      if (getName) {
         res.status(400);
         throw new Error(
           "Nome já cadastrado no sistem, não pode haver dois produtos com o mesmo nome."
@@ -181,11 +183,17 @@ app.post("/products", async (req: Request, res: Response) => {
       );
     }
 
-    await db.raw(`
-    INSERT INTO products (id, name, price, category, img)
-    VALUES ("${id}", "${name}", ${price}, "${category}", "${img}");
-
-`);
+    // await db.raw(`
+    // INSERT INTO products (id, name, price, category, img)
+    // VALUES ("${id}", "${name}", ${price}, "${category}", "${img}");`);
+    const newProduct = {
+      id: id,
+      name: name,
+      price: price,
+      category: category,
+      img: img
+    }
+    await db('products').insert(newProduct)
 
     res.status(201).send(" Produto cadastrado com sucesso");
   } catch (error: any) {
@@ -314,39 +322,53 @@ app.post("/purchase", async (req: Request, res: Response) => {
     }
 
     if (id !== undefined) {
-      const getId = await db.raw(`
-            SELECT * FROM purchases
-            WHERE id = "${id}"
-        `);
-      if (getId.length > 0) {
+      // const getId = await db.raw(`
+      //       SELECT * FROM purchases
+      //       WHERE id = "${id}"
+      //   `);
+      const [getId] = await db('purchases').where({id: id})
+      if (getId) {
         res.status(400);
         throw new Error("Cadastre um id de usuário existente.");
       }
     }
 
     if (buyer_id !== undefined) {
-      const getId = await db.raw(`
-        SELECT * FROM purchases
-        WHERE buyer_id = "${buyer_id}"
-    `);
-      if (getId.length > 0) {
+    //   const getIdUser = await db.raw(`
+    //     SELECT * FROM purchases
+    //     WHERE buyer_id = "${buyer_id}"
+    // `);
+    const [getIdUser] = await db('purchases').where({buyer_id: buyer_id})
+      if (getIdUser) {
         res.status(400);
         throw new Error("Cadastre um id de produto existente");
       }
     }
 
-    await db.raw(`
-        INSERT INTO purchases (id, total_price, paid, delivered_at, buyer_id)
-        VALUES ("${id}", ${total_price}, ${paid}, "${delivered_at}", "${buyer_id}");
-    `);
+    // await db.raw(`
+    //     INSERT INTO purchases (id, total_price, paid, delivered_at, buyer_id)
+    //     VALUES ("${id}", ${total_price}, ${paid}, "${delivered_at}", "${buyer_id}");
+    // `);
+    const newPurchase = {
+      id,
+      total_price,
+      paid,
+      delivered_at, 
+      buyer_id
+    }
+    await db('purchases').insert(newPurchase)
 
     res.status(201).send("Compra realizada com sucesso");
-  } catch (error: any) {
+  } catch (error) {
     console.log(error.message);
     if (res.statusCode === 200) {
       res.status(500);
     }
-    res.send(error.message);
+    if(error instanceof Error){
+      res.send(error.message);
+    } else {
+      res.send("Erro inesperado")
+    }
   }
 });
 
@@ -393,17 +415,14 @@ app.get("/users/:id", async (req: Request, res: Response) => {
       throw new Error("Insira um id de produto.");
     }
 
-    const getUser = await db.raw(`
-        SELECT * FROM users
-        WHERE id = "${id}"
-      `);
+    const [getUser] = await db('users').where({id: id})
 
     if (!getUser) {
       res.status(400);
       throw new Error("Insira um id de produto válido.");
     }
 
-    if (getUser.length > 0) {
+    if (getUser) {
       res.status(200).send(getUser);
     }
   } catch (error: any) {
